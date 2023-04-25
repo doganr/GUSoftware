@@ -62,8 +62,6 @@ namespace GUSoftware
             //await firebase_istemci.Child("ogrenciler").Child("2107231037").Child("Ad").PutAsync<string>("Cankat");
             //await firebase_istemci.Child("ogrenciler").Child("2107231037").Child("Soyad").PutAsync<string>("Çiftçi");
 
-
-
         }
     }
 }
