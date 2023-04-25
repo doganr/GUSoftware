@@ -68,21 +68,30 @@ namespace GUSoftware
         }
 
         private async void LoginBtn_Click(object sender, EventArgs e)
-        {
+        {          
             try
             {
+                loginUC.loginBtn.Enabled = false;
+                loginUC.loginPb.Visible = true;
+
                 UserCredential kullanici_kimligi = await client.SignInWithEmailAndPasswordAsync(this.loginUC.emailTxt.Text.Trim(),
                                                                                    this.loginUC.paswordTxt.Text.Trim());
+               
+                this.Hide();
 
-                MessageBox.Show(kullanici_kimligi.User.Info.Email);
+                MainWindow nesne = new MainWindow(kullanici_kimligi);
+                nesne.Show();
             }
             catch (Exception exc)
             {
                 MessageBox.Show("HATA:"+exc.Message);
+                loginUC.loginBtn.Enabled = true;
+                loginUC.loginPb.Visible = false;
             }
             finally 
             {
-            
+                loginUC.loginBtn.Enabled = true;
+                loginUC.loginPb.Visible = false;
             }
 
         }

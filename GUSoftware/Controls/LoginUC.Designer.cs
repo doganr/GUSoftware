@@ -34,6 +34,7 @@
             this.paswordTxt = new System.Windows.Forms.TextBox();
             this.gosterCb = new System.Windows.Forms.CheckBox();
             this.loginBtn = new System.Windows.Forms.Button();
+            this.loginPb = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -95,10 +96,20 @@
             this.loginBtn.Text = "Giriş Yap";
             this.loginBtn.UseVisualStyleBackColor = true;
             // 
+            // loginPb
+            // 
+            this.loginPb.Location = new System.Drawing.Point(61, 95);
+            this.loginPb.Name = "loginPb";
+            this.loginPb.Size = new System.Drawing.Size(140, 23);
+            this.loginPb.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.loginPb.TabIndex = 4;
+            this.loginPb.Visible = false;
+            // 
             // LoginUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.loginPb);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.gosterCb);
             this.Controls.Add(this.paswordTxt);
@@ -106,7 +117,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "LoginUC";
-            this.Size = new System.Drawing.Size(262, 101);
+            this.Size = new System.Drawing.Size(262, 137);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +131,6 @@
         public System.Windows.Forms.TextBox emailTxt;
         public System.Windows.Forms.TextBox paswordTxt;
         public System.Windows.Forms.Button loginBtn;
+        public System.Windows.Forms.ProgressBar loginPb;
     }
 }
