@@ -3,6 +3,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace GUSoftware
                                                     {
                                                         AuthTokenAsyncFactory = () => kullanici_kimligi.User.GetIdTokenAsync()
                                                     });
-                //MessageBox.Show("Firebase Realtime Database için istemci oluşturuldu...", "Başarılı!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ogrenci_listele();
             } catch (Exception exc) 
             {
                 MessageBox.Show("Mesaj:"+exc.Message, "Hata!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -43,25 +44,51 @@ namespace GUSoftware
             Application.Exit();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void ogrenci_ekle_Click(object sender, EventArgs e)
         {
+            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci);
+            oekle.ShowDialog();
 
-            Ogrenci ogr1 = new Ogrenci();
-            ogr1.Ad = "Erdem";
-            ogr1.Soyad = "Dalca";
+            ogrenci_listele();
+        }
 
-            Ogrenci ogr2 = new Ogrenci();
-            ogr2.Ad = "Cankat";
-            ogr2.Soyad = "Çiftçi";
+        private async void ogrenci_listele() 
+        {
+            status_lbl.Text = "Öğrenci listesi sunucudan çekiliyor...";
+            status_pb.Visible = true;
 
-            await firebase_istemci.Child("ogrenciler").Child("2107231029").PutAsync(ogr1);
-            await firebase_istemci.Child("ogrenciler").Child("2107231037").PutAsync(ogr2);
+            IReadOnlyCollection<FirebaseObject<Ogrenci>> ogrenciler = await firebase_istemci.Child("ogrenciler").OrderByKey().OnceAsync<Ogrenci>();
 
-            //await firebase_istemci.Child("ogrenciler").Child("2107231029").Child("Ad").PutAsync<string>("Erdem");
-            //await firebase_istemci.Child("ogrenciler").Child("2107231029").Child("Soyad").PutAsync<string>("Dalca");
-            //await firebase_istemci.Child("ogrenciler").Child("2107231037").Child("Ad").PutAsync<string>("Cankat");
-            //await firebase_istemci.Child("ogrenciler").Child("2107231037").Child("Soyad").PutAsync<string>("Çiftçi");
+            DataTable ogrenciler_table = new DataTable();
+            ogrenciler_table.Columns.Add("Numara", typeof(string));
+            ogrenciler_table.Columns.Add("Ad", typeof(string));
+            ogrenciler_table.Columns.Add("Soyad", typeof(string));
 
+
+            foreach (FirebaseObject<Ogrenci> ogrenci in ogrenciler)
+            {
+                ogrenciler_table.Rows.Add(ogrenci.Key, ogrenci.Object.Ad, ogrenci.Object.Soyad);
+            }
+
+            ogrenciler_dgw.DataSource = ogrenciler_table;
+
+            status_lbl.Text = "";
+            status_pb.Visible = false;
+        }
+
+        private void ogrenciler_dgw_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int selected = e.RowIndex;
+
+            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci);
+            oekle.Text = "Öğrenci Bilgilerini Güncelle";
+            oekle.numara_txt.Text = ogrenciler_dgw.Rows[selected].Cells["Numara"].Value.ToString();
+            oekle.ad_txt.Text = ogrenciler_dgw.Rows[selected].Cells["Ad"].Value.ToString();
+            oekle.soyad_txt.Text = ogrenciler_dgw.Rows[selected].Cells["Soyad"].Value.ToString();
+            oekle.ogrenciekle_btn.Text = "Güncelle";
+            oekle.ShowDialog();
+
+            ogrenci_listele();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace GUSoftware
 {
     public class Ogrenci
     {
+        public string Numara { get; set; }
         public string Ad { get; set; }
-        public string Soyad { get; set; }
+        public string Soyad { get; set; }        
     }
 }
