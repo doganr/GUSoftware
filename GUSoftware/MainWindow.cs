@@ -18,16 +18,19 @@ namespace GUSoftware
     {
         private UserCredential kullanici_kimligi;
         private FirebaseClient firebase_istemci;
+        private Config ayarlar;
 
         public MainWindow(UserCredential kullanici_kimligi)
         {
             InitializeComponent();
+            ayarlar = new Config();
+
             this.kullanici_kimligi = kullanici_kimligi;
             this.Text = this.Text + " | Kullanıcı: " + kullanici_kimligi.User.Info.Email;
 
             try
             {
-                firebase_istemci = new FirebaseClient("https://gusoftware-doganr-default-rtdb.firebaseio.com/",
+                firebase_istemci = new FirebaseClient(ayarlar.FireBaseDomain,
                                                     new FirebaseOptions
                                                     {
                                                         AuthTokenAsyncFactory = () => kullanici_kimligi.User.GetIdTokenAsync()
@@ -46,7 +49,7 @@ namespace GUSoftware
 
         private async void ogrenci_ekle_Click(object sender, EventArgs e)
         {
-            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci);
+            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci, kullanici_kimligi);
             oekle.ShowDialog();
 
             ogrenci_listele();
@@ -80,7 +83,7 @@ namespace GUSoftware
         {
             int selected = e.RowIndex;
 
-            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci);
+            OgrenciEkleDuzenle oekle = new OgrenciEkleDuzenle(firebase_istemci, kullanici_kimligi);
             oekle.Text = "Öğrenci Bilgilerini Güncelle";
             oekle.numara_txt.Text = ogrenciler_dgw.Rows[selected].Cells["Numara"].Value.ToString();
             oekle.ad_txt.Text = ogrenciler_dgw.Rows[selected].Cells["Ad"].Value.ToString();

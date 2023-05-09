@@ -17,16 +17,18 @@ namespace GUSoftware
     public partial class Login : Form
     {
         private string AuthDomain, ApiKey;
+        private Config ayarlar;
         private CreateUserUC createUC;
         private LoginUC loginUC;
         private FirebaseAuthClient client;
 
-        public Login(string AuthDomain, string ApiKey)
+        public Login(Config ayarlar)
         {
             InitializeComponent();
 
-            this.AuthDomain = AuthDomain;
-            this.ApiKey = ApiKey;
+            this.AuthDomain = ayarlar.AuthDomain;
+            this.ApiKey = ayarlar.ApiKey;
+            this.ayarlar = ayarlar;
 
             createUC = new CreateUserUC();
             loginUC = new LoginUC();

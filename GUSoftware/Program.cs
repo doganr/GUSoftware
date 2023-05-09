@@ -15,15 +15,11 @@ namespace GUSoftware
         [STAThread]
         static void Main()
         {
-            XmlDocument config = new XmlDocument();
-            config.Load("config.xml");
-
-            string AuthDomain = config.DocumentElement.SelectSingleNode("/FireBase/AuthDomain").InnerText.Trim();
-            string ApiKey = config.DocumentElement.SelectSingleNode("/FireBase/ApiKey").InnerText.Trim();
+            Config ayarlar = new Config();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login(AuthDomain, ApiKey));
+            Application.Run(new Login(ayarlar));
         }
     }
 }
