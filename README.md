@@ -15,6 +15,8 @@ Kodların FireBase ortamı ile haberleşebilmesi için proje dizininde config.xm
 
 <FireBase>
 	<AuthDomain>domain_bilginiz</AuthDomain>
+	<FBDomain>fbase domain_bilginiz</FBDomain>
+	<FSDomain>fstorage domain_bilginiz</FSDomain>
 	<ApiKey>api_keyiniz</ApiKey>
 </FireBase>
 ```
