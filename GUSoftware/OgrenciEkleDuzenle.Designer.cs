@@ -174,8 +174,8 @@
         public System.Windows.Forms.TextBox soyad_txt;
         public System.Windows.Forms.Button ogrenciekle_btn;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox resim_pB;
         private System.Windows.Forms.Button resimsec_btn;
         private System.Windows.Forms.ProgressBar ogrenci_prbar;
+        public System.Windows.Forms.PictureBox resim_pB;
     }
 }

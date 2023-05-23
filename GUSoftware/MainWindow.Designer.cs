@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.button1 = new System.Windows.Forms.Button();
             this.ogrenciler_dgw = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.status_lbl = new System.Windows.Forms.Label();
             this.status_pb = new System.Windows.Forms.ProgressBar();
+            this.datagrid_cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ogrenciler_dgw)).BeginInit();
             this.panel1.SuspendLayout();
+            this.datagrid_cms.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -56,12 +61,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ogrenciler_dgw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ogrenciler_dgw.ContextMenuStrip = this.datagrid_cms;
             this.ogrenciler_dgw.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ogrenciler_dgw.Location = new System.Drawing.Point(12, 58);
             this.ogrenciler_dgw.Name = "ogrenciler_dgw";
             this.ogrenciler_dgw.Size = new System.Drawing.Size(1240, 665);
             this.ogrenciler_dgw.TabIndex = 1;
-            this.ogrenciler_dgw.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ogrenciler_dgw_CellMouseClick);
             // 
             // panel1
             // 
@@ -96,6 +101,29 @@
             this.status_pb.TabIndex = 0;
             this.status_pb.Visible = false;
             // 
+            // datagrid_cms
+            // 
+            this.datagrid_cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem,
+            this.silToolStripMenuItem});
+            this.datagrid_cms.Name = "datagrid_cms";
+            this.datagrid_cms.Size = new System.Drawing.Size(181, 70);
+            this.datagrid_cms.Opening += new System.ComponentModel.CancelEventHandler(this.datagrid_cms_Opening);
+            // 
+            // düzenleToolStripMenuItem
+            // 
+            this.düzenleToolStripMenuItem.Name = "düzenleToolStripMenuItem";
+            this.düzenleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.düzenleToolStripMenuItem.Text = "Düzenle";
+            this.düzenleToolStripMenuItem.Click += new System.EventHandler(this.düzenleToolStripMenuItem_Click);
+            // 
+            // silToolStripMenuItem
+            // 
+            this.silToolStripMenuItem.Name = "silToolStripMenuItem";
+            this.silToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem.Text = "Sil";
+            this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,6 +139,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.ogrenciler_dgw)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.datagrid_cms.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -122,5 +151,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label status_lbl;
         private System.Windows.Forms.ProgressBar status_pb;
+        private System.Windows.Forms.ContextMenuStrip datagrid_cms;
+        private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
     }
 }
